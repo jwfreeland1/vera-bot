@@ -7,16 +7,18 @@ module.exports = {
 	usage: '<add> <timezone> or <remove>',
 	execute(message, args) {
 
-		const array = fs.readFileSync(process.cwd() + "\\commands\\timezones.txt").toString();
+		const array = fs.readFileSync(process.cwd() + "/commands/timezones.txt").toString();
 		const timezone = args[1].toString().toUpperCase();
 		const newUser = (message.author.username + " (" + timezone + ")");
 		
 		// If user DMs the bot it will send an error message
 		if (message.channel.type == 'dm')
 		return message.author.send('Please use the #bot-commands channel to interact with me.');
-		// Handle permission error for permission error when owner attempts name change
+		// Handle permission error for when owner or mod attempts name change
 		if (message.author.id === message.guild.ownerID)
 		return message.author.send('I am terribly sorry about this, but I am unable to change the nickname of a server owner.');
+		if (message.member.roles.cache.has('700052590632763443'))
+        return message.author.send('I am terribly sorry about this, but I am unable to change the nickname of a mod.');
 		// Reset username back to their default Discord name, notify the user and then delete the user's command message
 		if (args[0] === 'add'){
 			if (array.includes(timezone)) {

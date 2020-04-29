@@ -7,7 +7,7 @@ module.exports = {
     usage: '<add/remove> <region>',
 	execute(message, args) {
 
-        const array = fs.readFileSync(process.cwd() + "\\commands\\roles.txt").toString();
+        const array = fs.readFileSync(process.cwd() + "/commands/roles.txt").toString();
         const region = args[1].toString().toUpperCase();
         let role = message.guild.roles.cache.find(role => role.name === region);
 
@@ -15,9 +15,11 @@ module.exports = {
         // If user DMs the bot it will send an error message
         if (message.channel.type == 'dm')
         return message.author.send('Please use the #bot-commands channel to interact with me.');
-        // Handle permission error for permission error when owner attempts name change
+        // Handle permission error for when owner or mod attempts to use command
         if (message.author.id === message.guild.ownerID)
         return message.author.send('I am terribly sorry about this, but I am unable to change the nickname of a server owner.');
+        if (message.member.roles.cache.has('700052590632763443'))
+        return message.author.send('I am terribly sorry about this, but I am unable to change the nickname of a mod.');
         // Check whether user is submitting an add or remove command then check against array to ensure it's valid
         if (args[0].toLowerCase() === 'add') {
             if (array.includes(region)) {
