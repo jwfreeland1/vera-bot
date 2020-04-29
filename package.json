@@ -1,0 +1,16 @@
+{
+  "name": "ValorantERA",
+  "version": "0.0.1",
+  "description": "Basic bot to update roles and change names",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "AGrizzlyBear",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  }
+}
