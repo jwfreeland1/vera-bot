@@ -27,18 +27,18 @@ module.exports = {
             if (array.includes(userRegion)) {
                 message.member.roles.add(regionData[userRegion]).catch(e => {
                     console.error('ERROR: Role ID does not exist');
-                    message.author.send('**ERROR!** That is not a valid Region');
+                    message.author.send('**ERROR!** That is not a valid Region on this server');
                     return;
                 });
-            } else message.author.send('I have added you to the ' + userRegion + ' group.');
+            } else message.author.send('I have added you to the ' + userRegion + ' group.').catch(() => message.reply(' I have added you to the ' + userRegion + ' group.'));
         } else if (args[0].toLowerCase() === 'remove'){
             if (array.includes(userRegion)) {
                 message.member.roles.remove(regionData[userRegion]).catch(e => {
                     console.error('ERROR: Role ID does not exist');
-                    message.author.send('**ERROR!** That is not a valid Region');
+                    message.author.send('**ERROR!** That is not a valid Region on this server');
                     return;
                 });
-            } else message.author.send('I have removed you from the ' + userRegion + ' group.');
+            } else message.author.send('I have removed you from the ' + userRegion + ' group.').catch(() => message.reply(' I have removed you from the ' + userRegion + ' group.'));
         }
     }
 };

@@ -8,8 +8,8 @@ module.exports = {
 	execute(message, args) {
 
 		const array = fs.readFileSync(process.cwd() + "/commands/timezones.txt").toString();
-		const timezone = args[1].toString().toUpperCase();
-		const newUser = (message.author.username + " (" + timezone + ")");
+		let timezone = args[1].toString().toUpperCase();
+		let newUser = (message.author.username + " (" + timezone + ")");
 		
 		// If user DMs the bot it will send an error message
 		if (message.channel.type == 'dm')
@@ -24,11 +24,11 @@ module.exports = {
 			if (array.includes(timezone)) {
 				message.member.setNickname(newUser);
 				message.author.send('I have added the timezone: ' + timezone);
-			} else return message.author.send('That is not a valid timezone. Please refer to the following link for a valid list: https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations');
+			} else return message.author.send('That is not a valid timezone. Please refer to the following link for a valid list: https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations').catch(() => message.reply(' That is not a valid timezone. Please refer to the following link for a valid list: https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations'));
 		}
 		else if (args[0] === 'remove') {
 			message.member.setNickname(message.author.username);
-			message.author.send('I have reset your name.');
+			message.author.send('I have reset your name.').catch(() => message.reply(' I have reset your name.'));
 			return;
 		}
 	}
